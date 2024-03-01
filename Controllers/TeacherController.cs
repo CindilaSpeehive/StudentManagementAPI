@@ -45,12 +45,11 @@ namespace StudentManagementAPI.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-        }
+            StudentManagementDbContext _dbContext = new StudentManagementDbContext();
+            Teacher? selectedTeacher = _dbContext.Teachers.Where(x => x.Id == id).FirstOrDefault();
 
-        // DELETE api/<TeacherController>/5
-        [HttpDelete("{id2}")]
-        public void Delete2(int id2)
-        {
+            _dbContext.Teachers.Remove(selectedTeacher);
+            _dbContext.SaveChanges();
         }
     }
 }
