@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StudentManagementAPI.Db;
+using StudentManagementAPI.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,22 +12,38 @@ namespace StudentManagementAPI.Controllers
     {
         // GET: api/<StudentController>
         [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
+        public List<Student> Get()
+        {   // get data from db using db context and return that value
+            StudentManagementDbContext _dbContext = new StudentManagementDbContext();
+            List<Student> allStudents=_dbContext.Students.ToList();
+
+
+            return allStudents;
+
         }
 
         // GET api/<StudentController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Student Get(int id)
         {
-            return "value";
+
+            // get data from db using db context and return that value
+            StudentManagementDbContext _dbContext = new StudentManagementDbContext();
+            Student? selectedStudent=  _dbContext.Students.Where(x=>x.Id==id).FirstOrDefault();
+
+
+            return  selectedStudent;
         }
 
         // POST api/<StudentController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post( Student value)
         {
+            //insert data using db context
+            StudentManagementDbContext _dbContext = new StudentManagementDbContext();
+
+            _dbContext.Students.Add(value);
+            _dbContext.SaveChanges();
         }
 
         // PUT api/<StudentController>/5
@@ -38,6 +56,11 @@ namespace StudentManagementAPI.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            StudentManagementDbContext _dbContext = new StudentManagementDbContext();
+            Student? selectedStudent = _dbContext.Students.Where(x => x.Id == id).FirstOrDefault();
+
+            _dbContext.Students.Remove(selectedStudent);
+            _dbContext.SaveChanges();
         }
     }
 }
