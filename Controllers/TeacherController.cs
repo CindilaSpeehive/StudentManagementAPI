@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StudentManagementAPI.Db;
+using StudentManagementAPI.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,8 +26,13 @@ namespace StudentManagementAPI.Controllers
 
         // POST api/<TeacherController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post(Teacher value)
         {
+            //insert data using db context
+            StudentManagementDbContext _dbContext = new StudentManagementDbContext();
+
+            _dbContext.Teachers.Add(value);
+            _dbContext.SaveChanges();
         }
 
         // PUT api/<TeacherController>/5
