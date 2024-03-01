@@ -46,5 +46,11 @@ namespace StudentManagementAPI.Controllers
         public void Delete(int id)
         {
         }
+
+        // DELETE api/<TeacherController>/5
+        [HttpDelete("{id2}")]
+        public void Delete2(int id2)
+        {
+        }
     }
 }
