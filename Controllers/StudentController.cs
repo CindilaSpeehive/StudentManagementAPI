@@ -45,9 +45,19 @@ namespace StudentManagementAPI.Controllers
 
         // PUT api/<StudentController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] Student updateValue)
         {
-            // Explore
+            StudentManagementDbContext _dbContext = new StudentManagementDbContext();
+            Student? existingStudent = _dbContext.Students.Where(x => x.Id == id).FirstOrDefault();
+            if (existingStudent != null)
+            {
+                // Update specific properties of existingStudent with updateValue
+                existingStudent.Name = updateValue.Name;
+                existingStudent.Description = updateValue.Description;
+
+                _dbContext.Students.Update(existingStudent); // Update the student in the database
+                _dbContext.SaveChanges();
+            }
         }
 
         // DELETE api/<StudentController>/5
