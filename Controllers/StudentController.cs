@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentManagementAPI.Db;
 using StudentManagementAPI.Models;
+using StudentManagementAPI.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,14 +12,18 @@ namespace StudentManagementAPI.Controllers
     public class StudentController : ControllerBase
     {
         // GET: api/<StudentController>
+
+        private readonly IStudentService _studentService;
+        public StudentController()
+        {
+               
+  
+            _studentService = new StudentService(); //  remove new 
+        }
         [HttpGet]
-        public List<Student> Get()
-        {   // get data from db using db context and return that value
-            StudentManagementDbContext _dbContext = new StudentManagementDbContext();
-            List<Student> allStudents=_dbContext.Students.ToList();
-
-
-            return allStudents;
+        public List<Student> GetList()
+        {
+            return _studentService.GetAll();
 
         }
 
@@ -26,24 +31,16 @@ namespace StudentManagementAPI.Controllers
         [HttpGet("{id}")]
         public Student Get(int id)
         {
-
-            // get data from db using db context and return that value
-            StudentManagementDbContext _dbContext = new StudentManagementDbContext();
-            Student? selectedStudent=  _dbContext.Students.Where(x=>x.Id==id).FirstOrDefault();
-
-
-            return  selectedStudent;
+            Student studentDetail=_studentService.Get(id);
+            return  studentDetail;
         }
 
         // POST api/<StudentController>
         [HttpPost]
         public void Post( Student value)
         {
-            //insert data using db context
-            StudentManagementDbContext _dbContext = new StudentManagementDbContext();
+            _studentService.Insert(value);
 
-            _dbContext.Students.Add(value);
-            _dbContext.SaveChanges();
         }
 
         // PUT api/<StudentController>/5
@@ -65,5 +62,6 @@ namespace StudentManagementAPI.Controllers
         }
 
         // change1
+        // chnage2
     }
 }
