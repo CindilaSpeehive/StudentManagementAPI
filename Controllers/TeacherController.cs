@@ -12,11 +12,14 @@ namespace StudentManagementAPI.Controllers
     {
         // GET: api/<TeacherController>
         [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        public List<Teacher> Get()
+        {  
+            // get data from db using db context and return that value
+            StudentManagementDbContext _dbContext = new StudentManagementDbContext();
+            List<Teacher> allTeachers = _dbContext.Teachers.ToList();
+            return allTeachers;
 
+        }
         // GET api/<TeacherController>/5
         [HttpGet("{id}")]
         public string Get(int id)
@@ -34,8 +37,6 @@ namespace StudentManagementAPI.Controllers
             _dbContext.Teachers.Add(value);
             _dbContext.SaveChanges();
         }
-
-        
 
         // DELETE api/<TeacherController>/5
         [HttpDelete("{id}")]
