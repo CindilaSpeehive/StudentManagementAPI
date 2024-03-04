@@ -35,11 +35,7 @@ namespace StudentManagementAPI.Controllers
             _dbContext.SaveChanges();
         }
 
-        // PUT api/<TeacherController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        
 
         // DELETE api/<TeacherController>/5
         [HttpDelete("{id}")]
@@ -50,6 +46,23 @@ namespace StudentManagementAPI.Controllers
 
             _dbContext.Teachers.Remove(selectedTeacher);
             _dbContext.SaveChanges();
+        }
+
+        // PUT api/<TeacherController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] Teacher updateValue)
+        {
+            StudentManagementDbContext _dbContext = new StudentManagementDbContext();
+            Teacher? existingStudent = _dbContext.Teachers.Where(x => x.Id == id).FirstOrDefault();
+            if (existingStudent != null)
+            {
+                // Update specific properties of existingStudent with updateValue
+                existingStudent.Name = updateValue.Name;
+                existingStudent.Subject = updateValue.Subject;
+
+                _dbContext.Teachers.Update(existingStudent); // Update the student in the database
+                _dbContext.SaveChanges();
+            }
         }
     }
 }
