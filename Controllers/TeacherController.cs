@@ -22,11 +22,13 @@ namespace StudentManagementAPI.Controllers
         }
         // GET api/<TeacherController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Teacher Get(int id)
         {
-            return "value";
+            // get data from db using db context and return that value
+            StudentManagementDbContext _dbContext = new StudentManagementDbContext();
+            Teacher? selectedTeacher = _dbContext.Teachers.Where(x => x.Id == id).FirstOrDefault();
+            return selectedTeacher;
         }
-
         // POST api/<TeacherController>
         [HttpPost]
         public void Post(Teacher value)
