@@ -9,5 +9,7 @@ namespace StudentManagementAPI.Services
         Student Get(int id);
         void Insert(Student student);
         void Delete(int id);
+        void Update(Student student,int id);
+
     }
 }

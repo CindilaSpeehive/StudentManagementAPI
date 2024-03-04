@@ -42,4 +42,19 @@ public class StudentService : IStudentService
         _dbContext.Students.Add(student);
         _dbContext.SaveChanges();
     }
+
+    public void Update(Student student, int id)
+    {
+        StudentManagementDbContext _dbContext = new StudentManagementDbContext();
+        Student? existingStudent = _dbContext.Students.Where(x => x.Id == id).FirstOrDefault();
+        if (existingStudent != null)
+        {
+            // Update specific properties of existingStudent with updateValue
+            existingStudent.Name = student.Name;
+            existingStudent.Description = student.Description;
+
+            _dbContext.Students.Update(existingStudent); // Update the student in the database
+            _dbContext.SaveChanges();
+        }
+    }
 }
