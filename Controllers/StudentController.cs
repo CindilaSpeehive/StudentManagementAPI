@@ -64,11 +64,7 @@ namespace StudentManagementAPI.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            StudentManagementDbContext _dbContext = new StudentManagementDbContext();
-            Student? selectedStudent = _dbContext.Students.Where(x => x.Id == id).FirstOrDefault();
-
-            _dbContext.Students.Remove(selectedStudent);
-            _dbContext.SaveChanges();
+            _studentService.Delete(id);
         }
 
         // change1

@@ -5,6 +5,16 @@ namespace StudentManagementAPI.Services;
 
 public class StudentService : IStudentService
 {
+    public void Delete(int id)
+    {
+
+        StudentManagementDbContext _dbContext = new StudentManagementDbContext();
+        Student? selectedStudent = _dbContext.Students.Where(x => x.Id == id).FirstOrDefault();
+
+        _dbContext.Students.Remove(selectedStudent);
+        _dbContext.SaveChanges();
+    }
+
     public Student Get(int id)
     {
 
