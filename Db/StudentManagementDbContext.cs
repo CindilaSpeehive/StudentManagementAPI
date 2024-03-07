@@ -8,6 +8,7 @@ namespace StudentManagementAPI.Db
         public DbSet<Student> Students { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<StudentAddress> StudentAddresses { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string path = "Server=localhost\\SQLEXPRESS;Database=StudentManagementDb;Trusted_Connection=True;Encrypt=false;TrustServerCertificate=true";
