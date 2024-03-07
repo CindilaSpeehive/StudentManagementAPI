@@ -11,7 +11,7 @@ namespace StudentManagementAPI.Db
         public DbSet<StudentAddress> StudentAddresses { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string path = "Server=localhost\\SQLEXPRESS;Database=StudentManagementDb;Trusted_Connection=True;Encrypt=false;TrustServerCertificate=true";
+            string path = "workstation id=SpeehiveTrainingdb.mssql.somee.com;packet size=4096;user id=codedstrings_SQLLogin_1;pwd=ltvx1dh9m3;data source=SpeehiveTrainingdb.mssql.somee.com;persist security info=False;initial catalog=SpeehiveTrainingdb;TrustServerCertificate=True";
             optionsBuilder.UseSqlServer(path);
             base.OnConfiguring(optionsBuilder);
         }
