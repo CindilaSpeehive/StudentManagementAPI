@@ -28,6 +28,13 @@ public class StudentController : ControllerBase
                                             .Include(x => x.StudentAddress)
                                             .ToList();
 
+
+        foreach (Student item in studentsWithAddress)
+        {
+            Console.WriteLine($" {item.Name} {item.StudentAddress?.City ?? string.Empty}");
+
+        }
+
         // todo dto mapping
 
         return studentsWithAddress;
@@ -48,41 +55,40 @@ public class StudentController : ControllerBase
     {
         StudentManagementDbContext _dbContext = new StudentManagementDbContext();
 
-
+        #region Method1
         Student studentObj = new Student();
         studentObj.Name = "Test";
         studentObj.Description = "Des";
 
         studentObj.StudentAddress = new StudentAddress()
         {
-            City="Test",
-            PostalCode="22222",
-            Street="Test",
+            City = "Test",
+            PostalCode = "22222",
+            Street = "Test",
         };
-
-
-       
         _dbContext.Students.Add(studentObj); // Adding value to Student, StudentAddress
         _dbContext.SaveChanges();
+        #endregion
 
         /////////////////////////////////////////////////////////////////////////////////
-        //Student studentObj2 = new Student();
-        //studentObj2.Name = "Test2";
-        //studentObj2.Description = "Test2";
+        #region Method2
+        Student studentObj2 = new Student();
+        studentObj2.Name = "Test2";
+        studentObj2.Description = "Test2";
+        studentObj2.StudentAddress = null;
 
-        //_dbContext.Students.Add(studentObj2);
-       
+        _dbContext.Students.Add(studentObj2);
+        _dbContext.SaveChanges();
 
+        StudentAddress address = new StudentAddress();
+        address.Street = "Teststs";
+        address.PostalCode = "1212";
+        address.City = "Kollam";
+        address.StudentId = studentObj2.Id; //FK
 
-        //StudentAddress address = new StudentAddress();
-        //address.Street = "Teststs";
-        //address.PostalCode = "1212";
-        //address.City = "Kollam";
-
-        //address.StudentId = studentObj2.Id; //FK
-
-        //_dbContext.StudentAddresses.Add(address);
-        //_dbContext.SaveChanges();
+        _dbContext.StudentAddresses.Add(address);
+        _dbContext.SaveChanges(); 
+        #endregion
 
 
 
