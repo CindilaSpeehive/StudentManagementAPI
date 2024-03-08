@@ -1,15 +1,13 @@
-﻿using StudentManagementAPI.Models;
+﻿using StudentManagementAPI.Dtos;
 
 namespace StudentManagementAPI.Services
 {
     public interface IStudentService
     {
-
-        List<Student> GetAll();
-        Student Get(int id);
-        void Insert(Student student);
+        List<StudentDetailsDto> GetAll();
+        StudentDetailsDto Get(int id);
+        void Insert(CreateUpdateStudentDto studentDto); // 
+        void Update(CreateUpdateStudentDto student,int id);
         void Delete(int id);
-        void Update(Student student,int id);
-
     }
 }

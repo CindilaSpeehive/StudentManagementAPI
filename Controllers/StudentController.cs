@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using StudentManagementAPI.Db;
-using StudentManagementAPI.Models;
+using StudentManagementAPI.Dtos;
 using StudentManagementAPI.Services;
-
 
 namespace StudentManagementAPI.Controllers;
 
@@ -19,86 +16,32 @@ public class StudentController : ControllerBase
         _studentService = new StudentService(); //  remove new 
     }
     [HttpGet]
-    public List<Student> GetList()
+    public List<StudentDetailsDto> GetList()
     {
-        StudentManagementDbContext _dbContext = new StudentManagementDbContext();
 
-       List<Student> studentsWithAddress = _dbContext
-                                            .Students
-                                            .Include(x => x.StudentAddress)
-                                            .ToList();
-
-
-        foreach (Student item in studentsWithAddress)
-        {
-            Console.WriteLine($" {item.Name} {item.StudentAddress?.City ?? string.Empty}");
-
-        }
-
-        // todo dto mapping
-
-        return studentsWithAddress;
-        // return _studentService.GetAll();
+        return _studentService.GetAll();
     }
 
     // GET api/<StudentController>/5
     [HttpGet("{id}")]
-    public Student Get(int id)
+    public StudentDetailsDto Get(int id)
     {
-        Student studentDetail=_studentService.Get(id);
-        return  studentDetail;
+        StudentDetailsDto studentDetail = _studentService.Get(id);
+        return studentDetail;
     }
 
     // POST api/<StudentController>
     [HttpPost]
-    public void Post()
+    public void Post(CreateUpdateStudentDto studentDto)
     {
-        StudentManagementDbContext _dbContext = new StudentManagementDbContext();
-
-        #region Method1
-        Student studentObj = new Student();
-        studentObj.Name = "Test";
-        studentObj.Description = "Des";
-
-        studentObj.StudentAddress = new StudentAddress()
-        {
-            City = "Test",
-            PostalCode = "22222",
-            Street = "Test",
-        };
-        _dbContext.Students.Add(studentObj); // Adding value to Student, StudentAddress
-        _dbContext.SaveChanges();
-        #endregion
-
-        /////////////////////////////////////////////////////////////////////////////////
-        #region Method2
-        Student studentObj2 = new Student();
-        studentObj2.Name = "Test2";
-        studentObj2.Description = "Test2";
-        studentObj2.StudentAddress = null;
-
-        _dbContext.Students.Add(studentObj2);
-        _dbContext.SaveChanges();
-
-        StudentAddress address = new StudentAddress();
-        address.Street = "Teststs";
-        address.PostalCode = "1212";
-        address.City = "Kollam";
-        address.StudentId = studentObj2.Id; //FK
-
-        _dbContext.StudentAddresses.Add(address);
-        _dbContext.SaveChanges(); 
-        #endregion
-
-
-
+        _studentService.Insert(studentDto);
     }
 
     // PUT api/<StudentController>/5
     [HttpPut("{id}")]
-    public void Put(int id, [FromBody] Student updateValue)
+    public void Put(int id, [FromBody] CreateUpdateStudentDto updateValue)
     {
-       _studentService.Update(updateValue, id);
+        _studentService.Update(updateValue, id);
     }
 
     // DELETE api/<StudentController>/5
