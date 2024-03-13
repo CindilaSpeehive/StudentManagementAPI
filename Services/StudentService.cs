@@ -157,4 +157,24 @@ public class StudentService : IStudentService
 
         _dbContext.SaveChanges();
     }
+
+    public List<StudentDto> GetStudentDetails()
+    {
+        List<Student> a = _dbContext.Students.ToList();
+        List<StudentDto> b = new List<StudentDto>();
+        foreach (Student item in a)
+        {
+            b.Add(new StudentDto()
+            {
+                Id = item.Id,
+                Name = item.Name
+
+
+            });
+
+            return b;
+
+        }
+
+    }
 }

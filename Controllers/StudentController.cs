@@ -50,4 +50,11 @@ public class StudentController : ControllerBase
     {
         _studentService.Delete(id);
     }
+
+    [HttpGet, Route("getstudentdetails")]
+    public List<StudentDto> GetStudentDetails()
+    {
+
+        return _studentService.GetStudentDetails();
+    }
 }
