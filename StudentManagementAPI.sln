@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentManagementAPI", "StudentManagementAPI.csproj", "{BC7C1205-F693-4D50-9039-32D7D4F6B126}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentManagementAPI", "StudentManagementAPI.csproj", "{BC7C1205-F693-4D50-9039-32D7D4F6B126}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WorkArea", "WorkArea", "{9BD5B9FE-DEC3-4876-BA39-73B6B3929463}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpCallExample", "HttpCallExample\HttpCallExample.csproj", "{27EDB9E1-6276-458F-B89E-86E8F37DA086}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{BC7C1205-F693-4D50-9039-32D7D4F6B126}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC7C1205-F693-4D50-9039-32D7D4F6B126}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC7C1205-F693-4D50-9039-32D7D4F6B126}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27EDB9E1-6276-458F-B89E-86E8F37DA086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27EDB9E1-6276-458F-B89E-86E8F37DA086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27EDB9E1-6276-458F-B89E-86E8F37DA086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27EDB9E1-6276-458F-B89E-86E8F37DA086}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{27EDB9E1-6276-458F-B89E-86E8F37DA086} = {9BD5B9FE-DEC3-4876-BA39-73B6B3929463}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {95A94B2D-6AD1-4011-8D91-88062E2539E4}
