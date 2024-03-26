@@ -1,4 +1,6 @@
 
+using StudentManagementAPI.Filters;
+
 namespace StudentManagementAPI
 {
     public class Program
@@ -8,8 +10,11 @@ namespace StudentManagementAPI
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddControllers(opt =>
+            {
+                opt.Filters.Add<ApiExceptionFilterAttribute>();
+            });
 
-            builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentManagementAPI.Dtos;
+using StudentManagementAPI.Exceptions;
 using StudentManagementAPI.Services;
+
+
 
 namespace StudentManagementAPI.Controllers;
 
@@ -11,14 +14,10 @@ public class StudentController : ControllerBase
     // GET: api/<StudentController>
 
     private readonly IStudentService _studentService;
-    public StudentController()
-    {
-        _studentService = new StudentService(); //  remove new 
-    }
-    [HttpGet]
+    
     public List<StudentDetailsDto> GetList()
     {
-
+      
         return _studentService.GetAll();
     }
 
@@ -27,6 +26,8 @@ public class StudentController : ControllerBase
     public StudentDetailsDto Get(int id)
     {
         StudentDetailsDto studentDetail = _studentService.Get(id);
+
+      
         return studentDetail;
     }
 

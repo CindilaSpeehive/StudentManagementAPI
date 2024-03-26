@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentManagementAPI.Db;
 using StudentManagementAPI.Dtos;
+using StudentManagementAPI.Exceptions;
 using StudentManagementAPI.Models;
 
 namespace StudentManagementAPI.Services;
@@ -23,7 +24,7 @@ public class StudentService : IStudentService
 
     public StudentDetailsDto Get(int id)
     {
-
+        
         // get data from db using db context and return that value
         Student? selectedStudent = _dbContext.Students
           .Include(x => x.StudentAddress)
@@ -33,7 +34,7 @@ public class StudentService : IStudentService
 
         if (selectedStudent == null)
         {
-            return new StudentDetailsDto();
+            throw new NotFoundCustomException($"Student with ID {id} not found."); // Throw your custom exception here
         }
 
         //todo  Use Auto mapper
