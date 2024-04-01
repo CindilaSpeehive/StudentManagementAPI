@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StudentManagementAPI.Dtos;
 using StudentManagementAPI.Services;
 
@@ -15,7 +16,9 @@ public class StudentController : ControllerBase
     {
         _studentService = new StudentService(); //  remove new 
     }
-    [HttpGet]
+
+    //GetList() requires authorization to fetch data.
+    [HttpGet,Authorize]
     public List<StudentDetailsDto> GetList()
     {
 
